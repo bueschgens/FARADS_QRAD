@@ -1,5 +1,6 @@
 const sigma = 5.670374419E-8
 
+
 function tempsolver_old_algorithm(m, vfmat, temp, epsilon, rounds_max)
     # old algorithm used in matlab (slightly optimized)
     n_elements = size(m.elements,1)
