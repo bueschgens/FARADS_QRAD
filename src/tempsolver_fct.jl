@@ -96,11 +96,16 @@ end
 
 function tempsolver_gebhart_algorithm(m, vfmat, temp, epsilon, rounds_max)
     # Gebhart algorithm optimized
+    # aus Clark1974
     # does not work with epsilon = 1.0
     # TO DO: verbesserung der inversenbildung
     n_elements = size(m.elements,1)
     mat = zeros(n_elements, n_elements)
-    zusatz = Matrix{Int}(I, n_elements, n_elements) .* (1 ./ (1 .- epsilon))
+    identity = zeros(n_elements, n_elements)
+    for i = 1:n_elements
+        identity[i,i] = 1
+    end
+    zusatz = identity .* (1 ./ (1 .- epsilon))
     mat = vfmat .- zusatz
     mat .= inv(mat)  
     mat .= mat .* (-1)
@@ -119,3 +124,34 @@ function tempsolver_gebhart_algorithm(m, vfmat, temp, epsilon, rounds_max)
     return Qp
 end
 
+
+
+function tempsolver_gebhart_algorithm_new(m, vfmat, temp, epsilon, rounds_max)
+    # Gebhart algorithm optimized
+    # aus Clark1974
+    # does not work with epsilon = 1.0
+    # TO DO: verbesserung der inversenbildung
+    n_elements = size(m.elements,1)
+    mat = zeros(n_elements, n_elements)
+    identity = zeros(n_elements, n_elements)
+    for i = 1:n_elements
+        identity[i,i] = 1
+    end
+    zusatz = identity .* (1 ./ (1 .- epsilon))
+    mat = vfmat .- zusatz
+    mat .= inv(mat)  
+    mat .= mat .* (-1)
+    #mat = mat' * vfmat'
+    for i = 1:n_elements
+        mat[i,:] = mat[i,:] ./ (m.area[i,1] ./ m.area[:,1] .* ((1 .- epsilon) ./ epsilon))
+    end
+    Qp = zeros(n_elements,1)
+    for rounds = 1:rounds_max
+        for j = 1:n_elements
+            Qsum = sum(epsilon .* m.area[:,1] .* mat[:,j] .* sigma .* temp[:,1].^4)
+            Qp[j,1] = (epsilon[j,1] .* m.area[j,1] .* sigma .* temp[j,1].^4) - Qsum
+        end
+        # temp .= temp .* 1.1
+    end
+    return Qp
+end
