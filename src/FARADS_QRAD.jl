@@ -9,9 +9,9 @@ module FARADS_QRAD
     export tempsolver_old_algorithm
     export sigma
 
-    # export tempsolver_old_algorithm_optimized
-    # export tempsolver_modest_algorithm
-    # export tempsolver_gebhart_algorithm
+    export tempsolver_gebhart_getmatrix
+    export tempsolver_gebhart_calcQ
+
 
     include("./boundary_fct.jl")
     export set_bc_face!
