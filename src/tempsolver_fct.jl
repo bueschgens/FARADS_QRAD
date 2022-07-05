@@ -169,8 +169,8 @@ function tempsolver_modest_getmatrix_opt(m, mat, epsilon)
     end
     mat2 .= (1 ./ epsilon .* Matrix(1I,n_elements,n_elements)) .- mat2
     mat2 .= inv(mat2)
-    mat .= mat2 * mat
-    return mat
+    mat2 .= mat2 * mat
+    return mat2
 end
 
 function tempsolver_modest_calcQ_opt(m, SS, temp, rounds_max)
