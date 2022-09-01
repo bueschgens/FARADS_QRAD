@@ -189,6 +189,7 @@ end
 function tempsolver_old_algorithm_opt(m, vfmat, temp, epsilon; rounds = 1)
     # old algorithm heavily optimized 
     # verändert nach howell s.222 (ansatz nach J direkt q berechnen (ohne Fläche))
+    # auf s.210 (howell 2021) gefunden
     # does not work with epsilon = 1.0
     # klappt
     n_elements = size(m.elements,1)
