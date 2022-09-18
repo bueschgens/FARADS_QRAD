@@ -25,6 +25,9 @@ module FARADS_QRAD
     export set_bc_face!
     export set_bc_part!
 
+    export set_bc_face_by_com_linear!
+    export set_bc_face_by_com_linear2!
+
     include("./epsilon_effective_fct.jl")
     export get_epsilon_effective
 
