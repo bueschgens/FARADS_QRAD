@@ -2,7 +2,7 @@ const sigma = 5.670374419E-8
 
 
 function tempsolver_old_algorithm(m, vfmat, temp, epsilon; rounds = 1)
-    # old algorithm used in matlab (slightly optimized)
+    # old algorithm used in previous implementation (slightly optimized)
     n_elements = size(m.elements,1)
     # init matrix
     mat = zeros(n_elements, n_elements)
@@ -27,7 +27,7 @@ function tempsolver_old_algorithm(m, vfmat, temp, epsilon; rounds = 1)
 end
 
 function tempsolver_old_algorithm_for_epseff(m, vfmat, temp, epsilon)
-    # old algorithm used in matlab (slightly optimized)
+    # old algorithm adapted for epseff
     n_elements = size(m.elements,1)
     # init matrix
     mat = zeros(n_elements, n_elements)
@@ -50,10 +50,8 @@ function tempsolver_old_algorithm_for_epseff(m, vfmat, temp, epsilon)
 end
 
 function tempsolver_gebhart_getmatrix(m, vfmat, epsilon)
-    # Gebhart algorithm optimized
-    # aus Clark1974
+    # Gebhart algorithm optimized (Clark1974)
     # does not work with epsilon = 1.0
-    # klappt
     # TO DO: verbesserung der inversenbildung
     n_elements = size(m.elements,1)
     mat = zeros(n_elements, n_elements)
@@ -74,9 +72,8 @@ function tempsolver_gebhart_getmatrix(m, vfmat, epsilon)
 end
 
 # function tempsolver_gebhart_getmatrix2(m, vfmat, epsilon)
-#     # Gebhart algorithm optimized
-#     # aus Bornside1990
-#     # klappt NICHT
+#     # Gebhart algorithm optimized (Bornside1990)
+#     # does not work
 #     n_elements = size(m.elements,1)
 #     mat = zeros(n_elements, n_elements)
 #     for j = 1:n_elements
@@ -95,8 +92,7 @@ end
 # end
 
 function tempsolver_gebhart_calcQ(m, gebhart, temp, epsilon; rounds = 1)
-    # Gebhart algorithm optimized
-    # aus Clark1974
+    # Gebhart algorithm optimized (Clark1974)
     # does not work with epsilon = 1.0
     n_elements = size(m.elements,1)
     Qp = zeros(n_elements,1)
@@ -112,8 +108,7 @@ function tempsolver_gebhart_calcQ(m, gebhart, temp, epsilon; rounds = 1)
 end
 
 function tempsolver_modest_getmatrix(m, vfmat, epsilon)
-    # Modest2013 algorithm S.586ff
-    # klappt
+    # algorithm (Modest2013)
     n_elements = size(m.elements,1)
     ss = zeros(n_elements, n_elements)
     T = zeros(n_elements, n_elements)
@@ -136,7 +131,7 @@ function tempsolver_modest_getmatrix(m, vfmat, epsilon)
 end
 
 function tempsolver_modest_calcQ(m, SS, temp; rounds = 1)
-    # Modest2013 algorithm S.586ff
+    # algorithm (Modest2013)
     n_elements = size(m.elements,1)
     Qp = zeros(n_elements,1)
     for round = 1:rounds
@@ -153,9 +148,7 @@ function tempsolver_modest_calcQ(m, SS, temp; rounds = 1)
 end
 
 function tempsolver_modest_getmatrix_opt(m, mat, epsilon)
-    # Modest2013 algorithm S.586ff
-    # optimiert nach eigenem ermessen
-    # klappt
+    # algorithm (Modest2013) slightly optimized
     n_elements = size(m.elements,1)
     mat2 = zeros(n_elements, n_elements)
     for i = 1:n_elements
@@ -174,7 +167,7 @@ function tempsolver_modest_getmatrix_opt(m, mat, epsilon)
 end
 
 function tempsolver_modest_calcQ_opt(m, SS, temp; rounds = 1)
-    # Modest2013 algorithm S.586ff
+    # algorithm (Modest2013) slightly optimized
     n_elements = size(m.elements,1)
     Qp = zeros(n_elements,1)
     for round = 1:rounds
@@ -187,11 +180,8 @@ function tempsolver_modest_calcQ_opt(m, SS, temp; rounds = 1)
 end
 
 function tempsolver_old_algorithm_opt(m, vfmat, temp, epsilon; rounds = 1)
-    # old algorithm heavily optimized 
-    # verändert nach howell s.222 (ansatz nach J direkt q berechnen (ohne Fläche))
-    # auf s.210 (howell 2021) gefunden
+    # old algorithm heavily optimized (Howell2021: (ansatz nach J direkt q berechnen (ohne Fläche))
     # does not work with epsilon = 1.0
-    # klappt
     n_elements = size(m.elements,1)
     # init matrix
     mat = zeros(n_elements, n_elements)
