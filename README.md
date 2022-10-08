@@ -1,6 +1,14 @@
 # FARADS_QRAD
 
-FARADS provides a model for calculating view factors of arbitrary three-dimensional geometries. With these view factors the additional application of the net radiation method for calculating exchanged heat fluxes can be used.
+## FARADS - Fast and Accurate calculation of RADiation heat transfer between arbitrary three-dimensional Surfaces
+
+other modules of FARADS:
+- FARADS_GEOM
+- FARADS_MESHING
+- FARADS_PLOT
+- FARADS_VFCALC
+
+FARADS provides a framework for calculating view factors of arbitrary three-dimensional geometries. With these view factors the additional application of the net radiation method for calculating exchanged heat fluxes can be used.
 
 FARADS_QRAD is the module providing all functions for calculating heat fluxes by using the net radiation method.
 - setting up boundary conditions
